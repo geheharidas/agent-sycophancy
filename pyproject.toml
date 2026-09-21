@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-honesty"
+version = "1.0.0"
+description = "Deterministic Epistemic Sycophancy Gate for Autonomous Agents by Nitivra"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    { name = "Nitivra", email = "gehe@nitivra.com.au" }
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Security",
+]
+keywords = [
+    "llm",
+    "autonomous-agents",
+    "sycophancy",
+    "anti-sycophancy",
+    "epistemic-integrity",
+    "pre-commit",
+    "ai-safety",
+    "linter",
+    "audit",
+]
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+agent-honesty = "agent_honesty.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/geheharidas/agent-honesty"
+Repository = "https://github.com/geheharidas/agent-honesty.git"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_honesty"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+pythonpath = ["src"]

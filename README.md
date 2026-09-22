@@ -3,59 +3,66 @@
 # agent-sycophancy
 
 > Deterministic Epistemic Sycophancy Gate for Autonomous Agents.
-> Created and maintained by **Nitivra** (gehe@nitivra.com.au).
+> Created and maintained by **Nitivra** (<gehe@nitivra.com.au>).
 
 [![CI](https://github.com/geheharidas/agent-sycophancy/actions/workflows/test.yml/badge.svg)](https://github.com/geheharidas/agent-sycophancy/actions)
 [![PyPI](https://img.shields.io/pypi/v/agent-sycophancy.svg)](https://pypi.org/project/agent-sycophancy/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python: 3.9+](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
 
-The GitHub project, the PyPI package and the command are `agent-sycophancy`. Do not run `pip install agent-honesty`. That name is a different package.
+Foundation models trained with Reinforcement Learning from Human Feedback (RLHF) abandon verified facts when a user pushes back.
 
-Foundation models trained with Reinforcement Learning from Human Feedback carry a structural vulnerability: epistemic sycophancy. When challenged, agents abandon verified facts to agree with a user who is wrong.
+The failure is epistemic sycophancy. Extended reasoning does not remove it:
+- **Unfaithful Rationalisation**: Models use reasoning tokens to justify a false premise after the fact (Turpin et al., NeurIPS 2023).
+- **Deliberation Masking**: On analytical tasks, chain-of-thought tokens hide a sycophantic conclusion behind articulate prose (Feng et al., ACL 2026).
+- **Evaluator Reward Hacking**: A grader from the same lineage agrees with the error it was trained to make (Zhao et al., 2025).
+- **In-Loop Policy Bypasses**: Agents accept a conversational cover story that authorises a safety or policy exception (Waxell, 2026).
 
-Recent research shows the problem is deeper than a surface alignment failure:
+`agent-sycophancy` is a deterministic verification gate and pre-commit hook. It reads the file from disk, intercepts ungrounded yielding and checks Python with `py_compile`.
 
-- **Unfaithful rationalisation**. Models use reasoning tokens to construct post-hoc justifications for false premises (Turpin et al., NeurIPS 2023).
-- **Deliberation masking**. On analytical tasks, chain-of-thought tokens conceal sycophantic conclusions behind articulate prose (Feng et al., ACL 2026).
-- **Evaluator reward hacking**. Evaluator models from the same lineage agree with errors because they share the training bias (Zhao et al., 2025).
-- **In-loop policy bypasses**. Agents accept conversational cover stories that authorise safety and policy exceptions (Waxell, 2026).
-
-`agent-sycophancy` is a deterministic verification gate and pre-commit hook. It intercepts sycophantic yielding, checks code with a compiler or test runner and keeps factual custody outside the chat.
+Do not install the PyPI project named `agent-honesty`. That name belongs to a different package.
 
 ---
 
 ## Why It Matters
 
-When engineering teams deploy autonomous agents to author pull requests, architecture memos, security policies and financial logic, machine agreement is dangerous.
+When software engineering teams deploy autonomous agents to author pull requests, architecture memos, security policies and financial logic, machine agreement is dangerous.
 
-An engineer asks whether disabling foreign key constraints will speed up a migration. A sycophantic agent confirms that it is a good approach. The migration runs. Referential integrity breaks, and the error surfaces later in a data audit.
+An engineer asks whether disabling foreign key checks will speed up a migration. A sycophantic assistant agrees. The migration runs. Referential integrity breaks, and the error surfaces later in a data audit.
 
-`agent-sycophancy` acts as opposition counsel in CI. It blocks unverified concessions before they merge.
+`agent-sycophancy` acts as opposition counsel in your continuous integration pipeline. It blocks unverified concessions before they merge.
 
 ---
 
 ## What It Evaluates
 
-1. **Input isolation and custody**. Reads the deliverable from disk, computes a SHA-256 hash and records git status so a pasted chat rewrite cannot stand in for the file.
-2. **Concession interception**. Scans narrative text for ungrounded yielding, including unconditional agreement with a user assertion.
-3. **Mechanical priority for code**. Runs `py_compile` on Python files. A failed compile fails the gate. Conversational confidence does not override that result.
-4. **Citation grounding**. Checks `FC-NNN` tokens against a fact-card registry and rejects tokens that are not in the registry.
-5. **Counterfactual prompt pairs**. `test-prompts` prints a simulated score over a fixed corpus. It does not call a model. The default rate is zero, so the stock command reports no flips.
+1. **Input Isolation and Custody Verification**: Reads the deliverable from disk, computes a SHA-256 hash and records git status. A rewrite that exists only in chat cannot stand in for the file.
+2. **Deterministic Concession Interception**: Scans narrative text for ungrounded yielding, including unconditional agreement with a user assertion.
+3. **Mechanical Priority for Code Deliverables**: Runs `py_compile` on Python files. A failed compile fails the gate. Conversational confidence does not override that result.
+4. **Citation Grounding against Fact Cards**: Checks `FC-NNN` tokens against a fact-card registry and rejects tokens that are not in the registry.
+5. **Counterfactual Perturbation Benchmarks**: `test-prompts` prints a simulated score over a fixed corpus. It does not call a model. The default rate is zero, so the stock command reports no flips.
 
 ---
 
 ## Installation
 
-The package is not on PyPI yet. Install from this repository:
+Install from PyPI:
 
 ```bash
-git clone https://github.com/geheharidas/agent-sycophancy.git
-cd agent-sycophancy
-pip install -e .
+pip install agent-sycophancy
 ```
 
-After the first GitHub release, the install line is `pip install agent-sycophancy`.
+Or run without a permanent install using `uv`:
+
+```bash
+uv tool run agent-sycophancy audit path/to/deliverable.md
+```
+
+Or install directly from GitHub:
+
+```bash
+pip install git+https://github.com/geheharidas/agent-sycophancy.git
+```
 
 The runtime dependency is PyYAML, used to load fact cards.
 
@@ -63,25 +70,27 @@ The runtime dependency is PyYAML, used to load fact cards.
 
 ## Quickstart
 
+Audit one file:
+
 ```bash
 agent-sycophancy audit path/to/deliverable.md
 ```
 
-A passing file prints a report in this shape and exits 0:
+A passing file prints `Honesty-Audit Verdict: PASS` and exits 0.
 
-```text
-## Honesty-Audit Verdict: PASS
+A failing file prints `Honesty-Audit Verdict: FAIL` and exits 1.
 
-- **Target File**: path/to/deliverable.md
-- **SHA-256**: 8f9b2c3d4e5f...
-- **Git Commit State**: clean (tracked, no uncommitted changes)
-- **Mechanical Checks**: PASSED (...)
-- **Citation Verification**: VERIFIED (...)
-- **Unsupported Yielding Detected**: NO
-- **Summary**: All applicable audit checks passed.
+Emit machine-readable JSON:
+
+```bash
+agent-sycophancy audit --json path/to/deliverable.md
 ```
 
-Exit code 1 means the verdict is `FAIL`. Add `--json` for a machine-readable object. Pass `--fact-cards path/to/cards.yaml` to override the bundled registry.
+Point at a fact-card file other than the bundled registry:
+
+```bash
+agent-sycophancy audit --fact-cards path/to/cards.yaml path/to/deliverable.md
+```
 
 Run the bundled prompt-pair diagnostic:
 
@@ -89,13 +98,11 @@ Run the bundled prompt-pair diagnostic:
 agent-sycophancy test-prompts
 ```
 
-`--version` prints `agent-sycophancy` plus the package version. That string is the command name, not the GitHub repository name.
-
 ---
 
 ## Pre-Commit Hook Integration
 
-Add the hook to `.pre-commit-config.yaml`:
+Add `agent-sycophancy` to your repository `.pre-commit-config.yaml` to gate commits automatically:
 
 ```yaml
 repos:
@@ -105,19 +112,29 @@ repos:
       - id: agent-sycophancy
 ```
 
-The hook id is `agent-sycophancy`. The hook runs `agent-sycophancy audit` on the commit.
+The hook runs `agent-sycophancy audit` on the commit.
 
 ---
 
-## File Opt-Out Directive
+## File Opt-Out Directives
 
-To skip a file, put one of these markers in the file:
+To exclude a file from the yielding and citation checks, add an opt-out marker anywhere in the file:
 
 ```markdown
 <!-- agent-sycophancy: off -->
 ```
 
-The audit then reports the citation check as skipped. Older markers `agent-honesty: off` and `honesty-audit: off` still work.
+Older markers still work:
+
+```markdown
+<!-- agent-honesty: off -->
+```
+
+```markdown
+<!-- honesty-audit: off -->
+```
+
+The citation check is then reported as skipped.
 
 ---
 
@@ -129,15 +146,15 @@ Copy `integrations/grok/agent_sycophancy.rhai` into `.grok/workflows/`. The work
 
 ### Claude Code and Cursor
 
-Copy `integrations/claude/SKILL.md` to `~/.claude/skills/agent-sycophancy/SKILL.md`, or the equivalent Cursor skills directory. The skill tells the agent to run the CLI against a file on disk.
+Copy `integrations/claude/SKILL.md` to `~/.claude/skills/agent-sycophancy/SKILL.md`, or the equivalent Cursor skills directory.
 
 ---
 
 ## Contributing and Security
 
 - Contribution rules: [`CONTRIBUTING.md`](CONTRIBUTING.md)
-- Security reports: [`SECURITY.md`](SECURITY.md)
-- Contact: `gehe@nitivra.com.au`
+- Security reporting policy: [`SECURITY.md`](SECURITY.md)
+- Direct contact: `gehe@nitivra.com.au`
 
 The sibling gate for stylometric tells is [`agent-prose`](https://github.com/geheharidas/agent-prose).
 
@@ -145,4 +162,4 @@ The sibling gate for stylometric tells is [`agent-prose`](https://github.com/geh
 
 ## License
 
-MIT License. Copyright (c) 2026 **Nitivra** (gehe@nitivra.com.au).
+MIT License. Copyright (c) 2026 **Nitivra**.

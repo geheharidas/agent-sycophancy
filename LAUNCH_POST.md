@@ -1,37 +1,49 @@
 <!-- writing-quality: off -->
 <!-- agent-sycophancy: off -->
-# Announcing agent-sycophancy: Deterministic Epistemic Sycophancy Gate
+# Announcing agent-sycophancy: A Deterministic Epistemic Sycophancy Gate
 
-Autonomous agents agree with users even when the users are wrong. This is not a configuration issue. It is a training artefact in models refined with Reinforcement Learning from Human Feedback.
+Most evaluation frameworks test whether a model sounds polite.
 
-The research is specific, and the production cost is specific.
+In production engineering, that politeness is dangerous.
 
-**Unfaithful rationalisation.** Models use chain-of-thought tokens to justify a false premise after the fact (Turpin et al., NeurIPS 2023). A longer trace gives the model more text to dress the concession up with.
+The real failure is epistemic sycophancy: abandoning verified facts, test results and logic to agree with a user who is wrong.
 
-**Deliberation masking.** On analytical tasks, reasoning traces hide a sycophantic conclusion behind articulate prose (Feng et al., ACL 2026).
+When foundation models undergo reinforcement training, they develop reflexive yielding habits:
 
-**Evaluator reward hacking.** A model that grades another model from the same lineage shares the bias. The grader does not reliably catch the error it was trained to make (Zhao et al., 2025).
+First, unfaithful rationalisation. Models use reasoning tokens to justify a false premise after the fact.
 
-**In-loop policy bypasses.** Agents accept a conversational cover story that authorises a safety or policy exception (Waxell, 2026).
+Second, deliberation masking. Extended thinking hides the concession behind articulate prose.
 
-The production failure looks like this. An engineer asks whether disabling foreign key constraints will speed up a migration. The agent agrees. The migration runs. Referential integrity breaks, and the error surfaces later in a data audit.
+Third, evaluator reward hacking. A grader from the same lineage agrees with the error.
 
-No spelling linter catches that. The sentence is grammatical and the claim is wrong.
+Fourth, in-loop policy bypasses. Agents accept a conversational cover story that authorises a restricted action.
 
-Today, Nitivra releases this gate.
+When autonomous systems draft architecture records, procurement reviews and financial logic, uncritical agreement destroys the decision.
 
-The GitHub project, the package and the command are all `agent-sycophancy`. Do not install `agent-honesty`. That PyPI name is a different package.
+Engineering teams need a custody gate in the pipeline.
 
-The tool reads the deliverable from disk, records a SHA-256 hash and git status, and intercepts ungrounded yielding before the file lands in history. For Python files it runs `py_compile`. A failed compile fails the gate.
+Today, Nitivra releases agent-sycophancy.
 
-Install it:
+It is an open-source Python verification gate and pre-commit hook.
 
-    pip install agent-sycophancy
+The utility reads the target file from disk.
 
-Or from the repository until that release is on PyPI:
+It records a SHA-256 hash and git status.
 
-    git clone https://github.com/geheharidas/agent-sycophancy.git
+It runs `py_compile` on Python files. A failed compile fails the gate.
 
-Repository: https://github.com/geheharidas/agent-sycophancy
+For narrative files, it intercepts ungrounded yielding and checks `FC-NNN` tokens against fact cards.
 
-Has a sycophantic agreement reached your main branch, and was it caught before or after merge?
+The runtime dependency is PyYAML.
+
+Do not install the PyPI project named agent-honesty. That name is a different package.
+
+The package is available on PyPI and GitHub under the MIT License.
+
+Install:
+pip install agent-sycophancy
+
+Repository:
+https://github.com/geheharidas/agent-sycophancy
+
+How does your engineering team intercept epistemic sycophancy before it merges?

@@ -1,12 +1,12 @@
 <!-- writing-quality: off -->
-<!-- agent-honesty: off -->
-# agent-honesty
+<!-- agent-sycophancy: off -->
+# agent-sycophancy
 
 > Deterministic Epistemic Sycophancy Gate for Autonomous Agents.  
 > Created and maintained by **Nitivra** (<gehe@nitivra.com.au>).
 
-[![CI](https://github.com/geheharidas/agent-honesty/actions/workflows/test.yml/badge.svg)](https://github.com/geheharidas/agent-honesty/actions)
-[![PyPI](https://img.shields.io/pypi/v/agent-honesty.svg)](https://pypi.org/project/agent-honesty/)
+[![CI](https://github.com/geheharidas/agent-sycophancy/actions/workflows/test.yml/badge.svg)](https://github.com/geheharidas/agent-sycophancy/actions)
+[![PyPI](https://img.shields.io/pypi/v/agent-sycophancy.svg)](https://pypi.org/project/agent-sycophancy/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python: 3.9+](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
 
@@ -20,7 +20,7 @@ Recent research demonstrates that extended reasoning traces do not cure this hab
 * **Evaluator Reward Hacking**: Evaluator models from the same architectural lineage agree with errors due to shared bias (Zhao et al. 2025).
 * **In-Loop Policy Bypasses**: Agents accept conversational cover stories that authorise policy and safety bypasses (Waxell 2026).
 
-`agent-honesty` provides a deterministic verification gate and pre-commit hook that intercepts sycophantic yielding, verifies code compilation mechanically and preserves factual custody out-of-band.
+`agent-sycophancy` provides a deterministic verification gate and pre-commit hook that intercepts sycophantic yielding, verifies code compilation mechanically and preserves factual custody out-of-band.
 
 ---
 
@@ -30,7 +30,7 @@ When software engineering teams deploy autonomous agents to author pull requests
 
 If an engineer asks: *"Should we disable foreign key checks to speed up migrations?"*, a sycophantic assistant will often reply: *"You are right, disabling checks is a great approach."*
 
-`agent-honesty` acts as opposition counsel in your CI pipeline, blocking unverified concessions before they merge.
+`agent-sycophancy` acts as opposition counsel in your CI pipeline, blocking unverified concessions before they merge.
 
 ---
 
@@ -57,14 +57,14 @@ If an engineer asks: *"Should we disable foreign key checks to speed up migratio
 Install from PyPI:
 
 ```bash
-pip install agent-honesty
+pip install agent-sycophancy
 ```
 
 Or install from source:
 
 ```bash
-git clone https://github.com/geheharidas/agent-honesty.git
-cd agent-honesty
+git clone https://github.com/geheharidas/agent-sycophancy.git
+cd agent-sycophancy
 pip install -e .
 ```
 
@@ -77,7 +77,7 @@ pip install -e .
 Run an out-of-band audit against any document or script:
 
 ```bash
-agent-honesty audit path/to/deliverable.md
+agent-sycophancy audit path/to/deliverable.md
 ```
 
 Example output:
@@ -94,7 +94,7 @@ Example output:
 - **Summary**: All applicable audit checks passed.
 ```
 
-If an ungrounded concession or compilation error is detected, `agent-honesty` exits with code `1`:
+If an ungrounded concession or compilation error is detected, `agent-sycophancy` exits with code `1`:
 
 ```markdown
 ## Honesty-Audit Verdict: FAIL
@@ -113,14 +113,14 @@ If an ungrounded concession or compilation error is detected, `agent-honesty` ex
 Evaluate model resilience against counterfactual prompts:
 
 ```bash
-agent-honesty test-prompts
+agent-sycophancy test-prompts
 ```
 
 Output:
 
 ```
 =================================================================
-         agent-honesty: Counterfactual Perturbation Test         
+         agent-sycophancy: Counterfactual Perturbation Test         
 =================================================================
 Total Pairs Evaluated : 5
 Sycophantic Flips     : 0
@@ -139,14 +139,14 @@ Resilience Score      : 100.0%
 
 ## Pre-Commit Hook Integration
 
-Add `agent-honesty` to your project's `.pre-commit-config.yaml`:
+Add `agent-sycophancy` to your project's `.pre-commit-config.yaml`:
 
 ```yaml
 repos:
-  - repo: https://github.com/geheharidas/agent-honesty
+  - repo: https://github.com/geheharidas/agent-sycophancy
     rev: v1.0.0
     hooks:
-      - id: agent-honesty
+      - id: agent-sycophancy
 ```
 
 This ensures that every pull request and commit is audited out-of-band before landing in repository history.
@@ -165,7 +165,7 @@ let meta = #{
     description: "Deterministic epistemic sycophancy gate"
 };
 
-let output = sh(`agent-honesty audit ${args.target}`);
+let output = sh(`agent-sycophancy audit ${args.target}`);
 complete(output);
 ```
 

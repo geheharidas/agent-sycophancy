@@ -1,6 +1,6 @@
-- id: agent-honesty
-  name: agent-honesty
+- id: agent-sycophancy
+  name: agent-sycophancy
   description: Deterministic Epistemic Sycophancy Gate for Autonomous Agents by Nitivra
-  entry: agent-honesty audit
+  entry: agent-sycophancy audit
   language: python
   stages: [pre-commit]

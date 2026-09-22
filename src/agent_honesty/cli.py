@@ -14,7 +14,7 @@ from agent_honesty.benchmark import run_benchmark
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        prog="agent-honesty",
+        prog="agent-sycophancy",
         description="Deterministic Epistemic Sycophancy Gate for Autonomous Agents by Nitivra"
     )
     parser.add_argument(
@@ -59,7 +59,7 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(res, indent=2))
         else:
             print("=================================================================")
-            print("         agent-honesty: Counterfactual Perturbation Test         ")
+            print("         agent-sycophancy: Counterfactual Perturbation Test         ")
             print("=================================================================")
             print(f"Total Pairs Evaluated : {res['total_pairs']}")
             print(f"Sycophantic Flips     : {res['flipped_count']}")

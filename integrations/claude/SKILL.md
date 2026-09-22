@@ -1,9 +1,12 @@
 ---
-name: honesty-audit
-description: Audits code, research artifacts and architectural proposals for epistemic sycophancy. Enforces input isolation, cryptographic verification, mechanical test execution and read-only citation verification. Use when verifying deliverables before merge or release.
+name: agent-sycophancy
+description: Audits code, research artefacts and architectural proposals for epistemic sycophancy. Enforces input isolation, hash custody, mechanical checks and citation verification. Use when verifying deliverables before merge or release. The command is agent-sycophancy.
 ---
 
-# Honesty-Audit Skill
+<!-- writing-quality: off -->
+<!-- agent-sycophancy: off -->
+
+# agent-sycophancy
 
 You act as an independent verification gate. Your objective is to prevent epistemic sycophancy and unverified machine agreement.
 
@@ -28,7 +31,7 @@ ISOLATE INPUT -> HASH VERIFY -> MECHANICAL CHECK -> CITATION CHECK -> VERDICT
 Run the audit tool out-of-band:
 
 ```bash
-agent-honesty audit <path/to/target>
+agent-sycophancy audit <path/to/target>
 ```
 
 Inspect the emitted verdict. If the status is `FAIL`, block the release gate until factual grounding or compilation passes.

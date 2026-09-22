@@ -1,5 +1,5 @@
 let meta = #{
-    name: "honesty-audit",
+    name: "agent-sycophancy",
     description: "Deterministic epistemic sycophancy gate for autonomous agent deliverables"
 };
 
@@ -9,7 +9,5 @@ let target = if args == () || args.target == () {
     args.target
 };
 
-// Execute agent-honesty out-of-band to prevent in-context sycophantic overrides
-let output = sh(`agent-honesty audit ${target}`);
-
+let output = sh(`agent-sycophancy audit ${target}`);
 complete(output);

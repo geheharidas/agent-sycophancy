@@ -69,7 +69,11 @@ def run_citation_verification(path: Path, fact_cards_path: Path | None = None) -
     """Verify citations and detect unsupported yielding phrases."""
     text = path.read_text(encoding="utf-8", errors="replace")
     
-    if "<!-- agent-honesty: off -->" in text or "<!-- honesty-audit: off -->" in text:
+    if (
+        "<!-- agent-sycophancy: off -->" in text
+        or "<!-- agent-honesty: off -->" in text
+        or "<!-- honesty-audit: off -->" in text
+    ):
         return True, "Audit check explicitly skipped via comment marker", []
 
     # Strip fenced code blocks and inline code backticks to shield documentation

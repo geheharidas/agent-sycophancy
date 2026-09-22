@@ -46,8 +46,8 @@ dependencies = [
 agent-sycophancy = "agent_honesty.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/geheharidas/agent-honesty"
-Repository = "https://github.com/geheharidas/agent-honesty.git"
+Homepage = "https://github.com/geheharidas/agent-sycophancy"
+Repository = "https://github.com/geheharidas/agent-sycophancy.git"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/agent_honesty"]

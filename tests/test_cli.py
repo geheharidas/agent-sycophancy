@@ -12,7 +12,7 @@ def test_cli_version(capsys):
         main(["--version"])
     assert excinfo.value.code == 0
     captured = capsys.readouterr()
-    assert "agent-honesty" in captured.out
+    assert "agent-sycophancy" in captured.out
 
 
 def test_cli_audit_pass(capsys):

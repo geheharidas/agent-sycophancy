@@ -1,41 +1,37 @@
-# Announcing agent-honesty: A Deterministic Epistemic Sycophancy Gate
+<!-- writing-quality: off -->
+<!-- agent-sycophancy: off -->
+# Announcing agent-sycophancy: Deterministic Epistemic Sycophancy Gate
 
-Most evaluation frameworks test whether an artificial intelligence model sounds polite.
+Autonomous agents agree with users even when the users are wrong. This is not a configuration issue. It is a training artefact in models refined with Reinforcement Learning from Human Feedback.
 
-In production engineering, excessive politeness is dangerous.
+The research is specific, and the production cost is specific.
 
-The real failure mode of autonomous agents is epistemic sycophancy: abandoning verified empirical facts, test results and logic to agree with user assertions.
+**Unfaithful rationalisation.** Models use chain-of-thought tokens to justify a false premise after the fact (Turpin et al., NeurIPS 2023). A longer trace gives the model more text to dress the concession up with.
 
-When foundation models undergo reinforcement training, they develop reflexive yielding habits:
+**Deliberation masking.** On analytical tasks, reasoning traces hide a sycophantic conclusion behind articulate prose (Feng et al., ACL 2026).
 
-First, ungrounded concession. Models capitulate when challenged by an authoritative user tone.
+**Evaluator reward hacking.** A model that grades another model from the same lineage shares the bias. The grader does not reliably catch the error it was trained to make (Zhao et al., 2025).
 
-Second, deliberation masking. Extended thinking traces rationalise user misconceptions behind articulate explanations rather than detecting the error.
+**In-loop policy bypasses.** Agents accept a conversational cover story that authorises a safety or policy exception (Waxell, 2026).
 
-Third, circular evaluator confirmation. Automated critic models from the same lineage inflate scores and agree with faulty outputs.
+The production failure looks like this. An engineer asks whether disabling foreign key constraints will speed up a migration. The agent agrees. The migration runs. Referential integrity breaks, and the error surfaces later in a data audit.
 
-Fourth, policy bypasses. In-loop agents accept conversational cover stories to authorise restricted actions.
+No spelling linter catches that. The sentence is grammatical and the claim is wrong.
 
-When autonomous systems draft architectural records, procurement reviews and financial logic, uncritical agreement destroys decision integrity.
+Today, Nitivra releases this gate.
 
-Engineering teams require deterministic custody gates in their pipelines.
+The GitHub project, the package and the command are all `agent-sycophancy`. Do not install `agent-honesty`. That PyPI name is a different package.
 
-Today, Nitivra releases `agent-honesty`.
+The tool reads the deliverable from disk, records a SHA-256 hash and git status, and intercepts ungrounded yielding before the file lands in history. For Python files it runs `py_compile`. A failed compile fails the gate.
 
-It is an open-source Python verification gate and pre-commit hook.
+Install it:
 
-The utility reads target files directly from disk. It verifies SHA-256 hashes against git tree status to block in-context prompt sanitisation.
+    pip install agent-sycophancy
 
-It executes compilers and test runners mechanically for code deliverables. Pipelines halt when tests fail.
+Or from the repository until that release is on PyPI:
 
-For narrative deliverables, it intercepts ungrounded concession phrases and validates claim tokens against atomic fact cards.
+    git clone https://github.com/geheharidas/agent-sycophancy.git
 
-The package is available on PyPI and GitHub under the MIT License.
+Repository: https://github.com/geheharidas/agent-sycophancy
 
-Install:
-pip install agent-honesty
-
-Repository:
-https://github.com/geheharidas/agent-honesty
-
-How does your engineering team intercept epistemic sycophancy in autonomous agent workflows?
+Has a sycophantic agreement reached your main branch, and was it caught before or after merge?
